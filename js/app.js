@@ -6,6 +6,17 @@ App.Router.map(function() {
 
 App.IndexRoute = Ember.Route.extend({
   model: function() {
-    return ['red', 'yellow', 'blue'];
+    return Ember.RSVP.hash({
+      model: ['red', 'yellow', 'blue']
+    })
+    .then(function(hash) {
+      alert(hash.model);
+
+      return hash;
+    });
+  },
+
+  setupController: function(controller, hash) {
+    controller.setProperties(hash);
   }
 });
